@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         emailTextInputEditText = (TextInputEditText) findViewById(R.id.emailTextInputEditText);
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         logInButton = (Button) findViewById(R.id.logInButton);
@@ -67,5 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         else {
             return true;
         }
+
     }
 }
