@@ -1,5 +1,6 @@
 package pe.com.push_tdp.push_tdp;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import pe.com.push_tdp.push_tdp.activities.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText emailTextInputEditText;
@@ -39,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
     }
