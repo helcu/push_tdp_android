@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Push_tdp</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_add_request">AddRequestActivity</string>
 </resources>
