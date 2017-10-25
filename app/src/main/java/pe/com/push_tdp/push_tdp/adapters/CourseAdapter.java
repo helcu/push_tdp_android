@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import pe.com.push_tdp.push_tdp.R;
@@ -40,7 +42,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Course course= getListCourse().get(position);
-        holder.courseImageView.setImageResource(R.drawable.redes);
+        context=view.getContext();
+        Picasso.with(context).load(course.getImageCourse()).into(holder.courseImageView);
         holder.nameTextView.setText(course.getNameCourse());
         holder.studentsTextView.setText(String.valueOf(course.getNumberOfStudents()));
     }

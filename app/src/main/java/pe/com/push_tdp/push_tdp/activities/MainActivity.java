@@ -24,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
         final ArrayList<Course> listCourse=new ArrayList<Course>();
-        listCourse.add(new Course(1,"Redes y Comunicacion de Datos",10, null));
-        listCourse.add(new Course(2,"Estadistica Aplicada 1",20,null));
-        listCourse.add(new Course(3,"Calculo 2",25, null));
+        listCourse.add(new Course(1,"Redes y Comunicacion de Datos",10, "https://www.informatica-hoy.com.ar/redes/imagenes/redes-informaticas_clip_image012.jpg"));
+        listCourse.add(new Course(2,"Estadistica Aplicada 1",20,"https://cdn.geogebra.org/material/EI3VYWGILDOAdW4LKDKopvDqBzqC9Fot/material-ieKWOaRF.png"));
+        listCourse.add(new Course(3,"Calculo 2",25, "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Spherical_Coordinates_%28Colatitude%2C_Longitude%29.svg/360px-Spherical_Coordinates_%28Colatitude%2C_Longitude%29.svg.png"));
 
         courseRecyclerView = (RecyclerView) findViewById(R.id.courseRecyclerView);
         courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
