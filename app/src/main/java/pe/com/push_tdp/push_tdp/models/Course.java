@@ -8,14 +8,15 @@ public class Course {
 
     private int idCourse;
     private String nameCourse;
-    private int countOfStudents;
-    private int imageCourse;
+    private int numberOfStudents;
+    private int capacity;
+    private String imageCourse;
 
-    public Course(int idCourse, String nameCourse, int countOfStudents,int imageCourse) {
+    public Course(int idCourse, String nameCourse, int numberOfStudents, String imageCourse) {
         this.idCourse = idCourse;
         this.nameCourse = nameCourse;
-        this.countOfStudents = countOfStudents;
-        this.imageCourse=imageCourse;
+        this.numberOfStudents = numberOfStudents;
+        this.imageCourse = imageCourse;
     }
 
     public Course() {
@@ -37,19 +38,35 @@ public class Course {
         this.nameCourse = nameCourse;
     }
 
-    public int getCountOfStudents() {
-        return countOfStudents;
+    public int getNumberOfStudents() {
+        return numberOfStudents;
     }
 
-    public void setCountOfStudents(int countOfStudents) {
-        this.countOfStudents = countOfStudents;
+    public String getNumberOfStudentsAsString(){
+        return String.valueOf(capacity);
     }
 
-    public int getImageCourse() {
+    public void setNumberOfStudents(int numberOfStudents) {
+        this.numberOfStudents = numberOfStudents;
+    }
+
+    public String getImageCourse() {
         return imageCourse;
     }
 
-    public void setImageCourse(int imageCourse) {
+    public void setImageCourse(String imageCourse) {
         this.imageCourse = imageCourse;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getCapacityAsString(){
+        return String.valueOf(capacity);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
