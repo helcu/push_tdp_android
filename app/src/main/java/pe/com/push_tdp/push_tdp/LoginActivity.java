@@ -12,6 +12,7 @@ import android.widget.Toast;
 import pe.com.push_tdp.push_tdp.activities.MainActivity;
 
 import pe.com.push_tdp.push_tdp.activities.AddRequestActivity;
+import pe.com.push_tdp.push_tdp.activities.SignUpActivity;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 if (validate()) {
                     logInButton.setEnabled(false);
 
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }

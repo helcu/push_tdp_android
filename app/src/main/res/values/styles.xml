@@ -28,4 +28,14 @@
         <item name="android:padding">20dp</item>
     </style>
 
+
+    <style name="Widget.SignUpTextEdit">
+        <item name="android:textColorHighlight">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/login_input_state_selector</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
 </resources>
