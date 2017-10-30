@@ -1,4 +1,4 @@
-package pe.com.push_tdp.push_tdp;
+package pe.com.push_tdp.push_tdp.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -6,15 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import pe.com.push_tdp.push_tdp.activities.MainActivity;
-
-import pe.com.push_tdp.push_tdp.activities.AddRequestActivity;
+import pe.com.push_tdp.push_tdp.R;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class  LoginActivity extends AppCompatActivity {
     private TextInputEditText emailTextInputEditText;
     private TextInputEditText passwordTextInputEditText;
     //REMEMBER: Buttons has to be public to be able to use in class MyAsyncTask
@@ -35,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 if (validate()) {
                     logInButton.setEnabled(false);
 
@@ -45,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }
