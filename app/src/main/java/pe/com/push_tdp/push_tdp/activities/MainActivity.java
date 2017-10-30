@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(new SpecificPublicationsFragment(), "Specific Publications");
 
         viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
 
         addNewRequest.setOnClickListener(new View.OnClickListener() {
