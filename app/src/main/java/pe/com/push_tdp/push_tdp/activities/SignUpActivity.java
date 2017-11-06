@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import pe.com.push_tdp.push_tdp.LoginActivity;
 import pe.com.push_tdp.push_tdp.R;
 
 public class SignUpActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package pe.com.push_tdp.push_tdp;
+package pe.com.push_tdp.push_tdp.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -6,13 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import pe.com.push_tdp.push_tdp.activities.MainActivity;
-
-import pe.com.push_tdp.push_tdp.activities.AddRequestActivity;
-import pe.com.push_tdp.push_tdp.activities.SignUpActivity;
+import pe.com.push_tdp.push_tdp.R;
 
 
 public class LoginActivity extends AppCompatActivity {
