@@ -30,9 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SignUpActivity"
-            android:label="                       Registrate">
-
-
+            android:label="Registrate"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
