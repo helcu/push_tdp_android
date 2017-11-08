@@ -18,12 +18,12 @@ import pe.com.push_tdp.push_tdp.R;
 import pe.com.push_tdp.push_tdp.activities.PublicationDetailActivity;
 import pe.com.push_tdp.push_tdp.adapters.CourseAdapter;
 import pe.com.push_tdp.push_tdp.models.Course;
-import pe.com.push_tdp.push_tdp.network.APIConection;
+import pe.com.push_tdp.push_tdp.network.APIConnection;
 
 public class AllPublicationsFragment extends Fragment {
 
     Context context = getContext();
-    APIConection apiConection = new APIConection();
+    APIConnection apiConnection = new APIConnection();
 
     RecyclerView courseRecyclerView;
     CourseAdapter courseAdapter;
@@ -61,7 +61,7 @@ public class AllPublicationsFragment extends Fragment {
 
 
     void requestCourses() {
-        apiConection.getCourses(context, new APIConection.CoursesCallback() {
+        apiConnection.getCourses(context, new APIConnection.CoursesCallback() {
             @Override
             public void onSuccessResponse(List<Course> coursesAPI) {
                 courseAdapter.setListCourse(coursesAPI);

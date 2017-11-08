@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,14 +12,14 @@ import android.widget.Toast;
 
 import pe.com.push_tdp.push_tdp.R;
 import pe.com.push_tdp.push_tdp.models.Course;
-import pe.com.push_tdp.push_tdp.network.APIConection;
+import pe.com.push_tdp.push_tdp.network.APIConnection;
 import pe.com.push_tdp.push_tdp.util.Constants;
 import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 public class PublicationDetailActivity extends AppCompatActivity {
 
     Context context = this;
-    APIConection apiConection;
+    APIConnection apiConnection;
     Toolbar toolbar;
 
     @Override
@@ -40,7 +39,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
             finish();
         }
 
-        apiConection = new APIConection();
+        apiConnection = new APIConnection();
         requestCourseId(courseId);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,7 +47,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int userId = Integer.parseInt(SharedPreferencesUtil.getUserIdFromPrefs(context));
-                apiConection.subscribeCourse(context, courseId, userId, new APIConection.VolleyCallback() {
+                apiConnection.subscribeCourse(context, courseId, userId, new APIConnection.VolleyCallback() {
                     @Override
                     public void onSuccessResponse(String result) {
                         Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
@@ -66,7 +65,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
 
 
     void requestCourseId(int courseId) {
-        apiConection.getCourseDetail(context, courseId, new APIConection.CourseCallback() {
+        apiConnection.getCourseDetail(context, courseId, new APIConnection.CourseCallback() {
             @Override
             public void onSuccessResponse(Course course) {
 

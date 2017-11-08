@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import pe.com.push_tdp.push_tdp.R;
-import pe.com.push_tdp.push_tdp.network.APIConection;
+import pe.com.push_tdp.push_tdp.network.APIConnection;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -46,8 +46,8 @@ public class SignUpActivity extends AppCompatActivity {
                     String password = passwordTextInputEditText.getText().toString();
                     String token_id = "";
 
-                    APIConection apiConection = new APIConection();
-                    apiConection.register(context, username, password, name, lastName, token_id, new APIConection.VolleyCallback() {
+                    APIConnection apiConnection = new APIConnection();
+                    apiConnection.register(context, username, password, name, lastName, token_id, new APIConnection.VolleyCallback() {
                         @Override
                         public void onSuccessResponse(String result) {
                             Toast.makeText(context, result, Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package pe.com.push_tdp.push_tdp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import pe.com.push_tdp.push_tdp.R;
-import pe.com.push_tdp.push_tdp.network.APIConection;
+import pe.com.push_tdp.push_tdp.network.APIConnection;
 import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 
@@ -42,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validate()) {
                     logInButton.setEnabled(false);
+                    final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setMessage("Autentificando...");
+                    progressDialog.show();
 
                     manageFirebase();
 
@@ -49,11 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                     String password = passwordTextInputEditText.getText().toString();
                     String accessToken = SharedPreferencesUtil.getTokenFromPrefs(context);
 
-                    APIConection apiConection = new APIConection();
-                    apiConection.login(context, username, password, accessToken, new APIConection.VolleyCallback() {
+                    APIConnection apiConnection = new APIConnection();
+                    apiConnection.login(context, username, password, accessToken, new APIConnection.VolleyCallback() {
                         @Override
                         public void onSuccessResponse(String result) {
                             Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             startActivity(new Intent(context, MainActivity.class));
                             finish();
                         }
@@ -61,10 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(String error) {
                             Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             logInButton.setEnabled(true);
                         }
                     });
-
                 }
             }
         });

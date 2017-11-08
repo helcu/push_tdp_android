@@ -1,9 +1,7 @@
 package pe.com.push_tdp.push_tdp.network;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,7 +24,7 @@ import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
  * Created by kenkina on 7/11/2017.
  */
 
-public class APIConection {
+public class APIConnection {
 
 
     public void register(final Context context, final String username, final String password,
@@ -45,7 +43,7 @@ public class APIConection {
                             String statusCode = jsonObject.getString("StatusCode");
 
                             if (statusCode.equals("200")) {
-                                callback.onSuccessResponse(Constants.MESSAGE_REGISTER_SUCCESSFULLY);
+                                callback.onSuccessResponse(Constants.MESSAGE_USER_REGISTER_SUCCESSFULLY);
                             } else {
                                 String message = jsonObject.getString("Message");
                                 callback.onErrorResponse(message);// Constants.MESSAGE_LOGIN_FAILED);
@@ -284,6 +282,47 @@ public class APIConection {
                 Map<String, String> params = new HashMap<>();
                 params.put("course_id", String.valueOf(courseId));
                 params.put("user_id", String.valueOf(userId));
+                params.put("state", "ACT");
+                return params;
+            }
+        };
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public void addCourse(final Context context, final String name, final int vacancies, final VolleyCallback callback) {
+        String url = Constants.URL_API + "/courses";
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    String statusCode = jsonObject.getString("StatusCode");
+                    if (statusCode.equals("200")) {
+                        callback.onSuccessResponse(Constants.MESSAGE_COURSE_REGISTER_SUCCESSFULLY);
+                    }
+                    else {
+                        callback.onErrorResponse(Constants.MESSAGE_COURSE_REGISTER_FAILED);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+
+                callback.onErrorResponse(error.toString());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("vacancies", String.valueOf(vacancies));
+                params.put("url", "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png");
                 params.put("state", "ACT");
                 return params;
             }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pe.com.push_tdp.push_tdp.activities.AddRequestActivity">
+    tools:context="pe.com.push_tdp.push_tdp.activities.AddCourseActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,7 +20,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_request" />
+    <include layout="@layout/content_add_course" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/regiterNewCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@android:color/holo_red_dark"
+        app:rippleColor="@android:color/holo_red_dark"
+        android:src="@drawable/ic_check_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

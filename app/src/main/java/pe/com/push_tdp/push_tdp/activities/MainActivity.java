@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton addNewRequest = (FloatingActionButton) findViewById(R.id.addNewReqest);
+        FloatingActionButton addNewRequest = (FloatingActionButton) findViewById(R.id.addNewCourse);
         viewPager = (ViewPager) findViewById(R.id.mainViewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         addNewRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(MainActivity.this, AddRequestActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(MainActivity.this, AddCourseActivity.class);
+                startActivity(intent);
             }
         });
     }
