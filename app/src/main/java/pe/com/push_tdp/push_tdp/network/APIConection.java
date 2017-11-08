@@ -164,7 +164,7 @@ public class APIConection {
                             String name = jsonCourse.getString("name");
                             int numberOfStudents = jsonCourse.getInt("registered");
                             int capacity = jsonCourse.getInt("vacancies");
-                            String url = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png";
+                            String url = jsonCourse.getString("url");
                             String state = jsonCourse.getString("state");
 
                             if (state.equals("ACT")) {
@@ -213,7 +213,7 @@ public class APIConection {
                         String name = jsonCourse.getString("name");
                         int numberOfStudents = jsonObject.getInt("Registered");
                         int capacity = jsonCourse.getInt("vacancies");
-                        String url = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png";
+                        String url = jsonCourse.getString("url");
 
                         Course course = new Course(courseId, name, numberOfStudents, capacity, url);
                         callback.onSuccessResponse(course);
