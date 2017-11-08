@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "114733679825",
+    "firebase_url": "https://pushel-a90d6.firebaseio.com",
+    "project_id": "pushel-a90d6",
+    "storage_bucket": "pushel-a90d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114733679825:android:546e039184664318",
+        "android_client_info": {
+          "package_name": "pe.com.push_tdp.push_tdp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114733679825-fkgtce8jto18b021jk6mt0aubcq8roif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDys8VRHRf0_PoVMji5npDxHzwhX7yeBrM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

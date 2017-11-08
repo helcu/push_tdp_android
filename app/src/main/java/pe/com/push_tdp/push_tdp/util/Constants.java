@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String SP_TDP_PUSH = "sp_tdp_push";
     public static final String SP_USER_ID = "sp_user_id";
+    public static final String SP_FIREBASE_CLIENT_TOKEN = "sp_firebase_client_token";
+
 
 
     public static final String MESSAGE_REGISTER_SUCCESSFULLY = "El usuario ha sido registrado exitosamente";

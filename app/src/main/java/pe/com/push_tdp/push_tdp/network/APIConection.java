@@ -20,6 +20,7 @@ import java.util.Map;
 
 import pe.com.push_tdp.push_tdp.models.Course;
 import pe.com.push_tdp.push_tdp.util.Constants;
+import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 /**
  * Created by kenkina on 7/11/2017.
@@ -98,12 +99,7 @@ public class APIConection {
                     String statusCode = jsonObject.getString("StatusCode");
                     if (statusCode.equals("200")) {
                         String userId = jsonObject.getString("user_id");
-
-                        SharedPreferences.Editor editor = context.getSharedPreferences(
-                                Constants.SP_TDP_PUSH, Context.MODE_PRIVATE).edit();
-                        editor.putString(Constants.SP_USER_ID, String.valueOf(userId));
-                        editor.apply();
-
+                        SharedPreferencesUtil.saveUserIdToPrefs(context, userId);
                         callback.onSuccessResponse(Constants.MESSAGE_LOGIN_SUCCESSFULLY);
                     } else {
                         String message = jsonObject.getString("Message");
@@ -238,6 +234,59 @@ public class APIConection {
                 callback.onErrorResponse(error.toString());
             }
         });
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+
+    public void subscribeCourse(final Context context, final int courseId, final int userId, final VolleyCallback callback) {
+
+        String url = Constants.URL_API + "/requests_users";
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String statusCode = jsonObject.getString("StatusCode");
+                    if (statusCode.equals("200")) {
+                        callback.onSuccessResponse("Subscrito al curso");
+                    } else {
+                        String message = jsonObject.getString("Message");
+                        callback.onErrorResponse(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callback.onErrorResponse(Constants.MESSAGE_APP_ERROR);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+                switch (statusCode) {
+                    case 205:
+                        callback.onErrorResponse("Nombre de usuario o contraseña incorrecto");
+                        break;
+                    case 400:
+                        callback.onErrorResponse("Las credenciales no son correctas o el usuario no está registrado");
+                        break;
+                    default:
+                        callback.onErrorResponse(Constants.MESSAGE_SERVER_ERROR);
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("course_id", String.valueOf(courseId));
+                params.put("user_id", String.valueOf(userId));
+                params.put("state", "ACT");
+                return params;
+            }
+        };
         APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 

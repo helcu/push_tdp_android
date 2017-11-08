@@ -1,5 +1,6 @@
 package pe.com.push_tdp.push_tdp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,10 +13,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 
@@ -25,8 +29,12 @@ import pe.com.push_tdp.push_tdp.adapters.ViewPagerAdapter;
 import pe.com.push_tdp.push_tdp.fragments.AllPublicationsFragment;
 import pe.com.push_tdp.push_tdp.fragments.SpecificPublicationsFragment;
 import pe.com.push_tdp.push_tdp.models.Course;
+import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    Context context = this;
+
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
@@ -52,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         addNewRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddRequestActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(MainActivity.this, AddRequestActivity.class);
+                startActivity(intent);*/
             }
         });
     }
@@ -95,4 +103,6 @@ public class MainActivity extends AppCompatActivity {
         courseAdapter.notifyDataSetChanged();
 
     }*/
+
+
 }

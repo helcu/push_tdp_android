@@ -15,6 +15,7 @@ import pe.com.push_tdp.push_tdp.R;
 import pe.com.push_tdp.push_tdp.models.Course;
 import pe.com.push_tdp.push_tdp.network.APIConection;
 import pe.com.push_tdp.push_tdp.util.Constants;
+import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 public class PublicationDetailActivity extends AppCompatActivity {
 
@@ -32,7 +33,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        int courseId = intent.getIntExtra("courseId", -1);
+        final int courseId = intent.getIntExtra("courseId", -1);
 
         if (courseId == -1) {
             Toast.makeText(context, Constants.MESSAGE_APP_ERROR, Toast.LENGTH_SHORT).show();
@@ -46,8 +47,18 @@ public class PublicationDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: SEND ID AND COURSE ID
-                Toast.makeText(context, "TODO: SEND ID AND COURSE ID", Toast.LENGTH_SHORT).show();
+                int userId = Integer.parseInt(SharedPreferencesUtil.getUserIdFromPrefs(context));
+                apiConection.subscribeCourse(context, courseId, userId, new APIConection.VolleyCallback() {
+                    @Override
+                    public void onSuccessResponse(String result) {
+                        Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onErrorResponse(String error) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
