@@ -7,17 +7,22 @@ package pe.com.push_tdp.push_tdp.models;
 public class User {
 
     private int id;
-    private String codeUser;
-    private String firstNameUser;
-    private String lastNameUser;
-    private String passwordUser;
+    private String name;
+    private String surname;
+    private String email;
+    private String username;
+    private String password;
+    private String state;
 
-    public User(int id, String codeUser, String firstNameUser, String lastNameUser, String passwordUser) {
+
+    public User(int id, String name, String surname, String email, String username, String password, String state) {
         this.id = id;
-        this.codeUser = codeUser;
-        this.firstNameUser = firstNameUser;
-        this.lastNameUser = lastNameUser;
-        this.passwordUser = passwordUser;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.state = state;
     }
 
     public User() {
@@ -32,35 +37,51 @@ public class User {
         this.id = id;
     }
 
-    public String getCodeUser() {
-        return codeUser;
+    public String getName() {
+        return name;
     }
 
-    public void setCodeUser(String codeUser) {
-        this.codeUser = codeUser;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFirstNameUser() {
-        return firstNameUser;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFirstNameUser(String firstNameUser) {
-        this.firstNameUser = firstNameUser;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getLastNameUser() {
-        return lastNameUser;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastNameUser(String lastNameUser) {
-        this.lastNameUser = lastNameUser;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPasswordUser() {
-        return passwordUser;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPasswordUser(String passwordUser) {
-        this.passwordUser = passwordUser;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pe.com.push_tdp.push_tdp.R;
+import pe.com.push_tdp.push_tdp.models.Course;
 import pe.com.push_tdp.push_tdp.models.User;
 
 /**
@@ -22,9 +23,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context context;
     private View view;
 
+    public UserAdapter(List<User> listCourse) {
+        setListUser(listCourse);
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_sign_up,parent,false);
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_users_view,parent,false);
         return new UserAdapter.ViewHolder(view);
     }
 
@@ -32,8 +37,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final User user= getListUser().get(position);
 
-        holder.firstNameTextView.setText(user.getFirstNameUser());
-        holder.lastNameTextView.setText(user.getLastNameUser());
+        holder.nameTextView.setText(user.getName());
+        holder.surnameTextView.setText(user.getSurname());
     }
 
 
@@ -51,15 +56,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView firstNameTextView;
-        TextView lastNameTextView;
-
+        TextView nameTextView;
+        TextView surnameTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            firstNameTextView=(TextView) itemView.findViewById(R.id.firstNameTextInputEditText);
-            lastNameTextView=(TextView) itemView.findViewById(R.id.lastNameTextInputEditText);
+            nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
+            surnameTextView = (TextView) itemView.findViewById(R.id.surnameTextView);
 
         }
     }

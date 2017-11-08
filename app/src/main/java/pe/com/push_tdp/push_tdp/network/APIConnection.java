@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import pe.com.push_tdp.push_tdp.models.Course;
+import pe.com.push_tdp.push_tdp.models.User;
 import pe.com.push_tdp.push_tdp.util.Constants;
 import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
@@ -289,14 +290,15 @@ public class APIConnection {
         APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
+
     public void addCourse(final Context context, final String name, final int vacancies, final VolleyCallback callback) {
         String url = Constants.URL_API + "/courses";
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject jsonObject = null;
                 try {
+                    JSONObject jsonObject = null;
                     jsonObject = new JSONObject(response);
                     String statusCode = jsonObject.getString("StatusCode");
                     if (statusCode.equals("200")) {
@@ -331,6 +333,51 @@ public class APIConnection {
     }
 
 
+    public void usersSubscribed(final Context context, final int courseId, final UsersCallback callback) {
+        String url = Constants.URL_API + "/requests_users/" + courseId;
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String statusCode = jsonObject.getString("StatusCode");
+
+                    if (statusCode.equals("200")) {
+                        List<User> users = new ArrayList<>();
+                        JSONArray jsonUsers = jsonObject.getJSONArray("Message");
+                        for (int i = 0; i < jsonUsers.length(); i++) {
+                            JSONObject jsonCourse = jsonUsers.getJSONObject(i);
+
+                            int userId = jsonCourse.getInt("id");
+                            String name = jsonCourse.getString("name");
+                            String surname = jsonCourse.getString("surname");
+                            String username = jsonCourse.getString("username");
+
+                            users.add(new User(userId, name, surname, "@", username, null, null));
+                        }
+                        callback.onSuccessResponse(users);
+                    }
+                    else {
+                        String message = jsonObject.getString("Message");
+                        callback.onErrorResponse(message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onErrorResponse(e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+
+                callback.onErrorResponse(error.toString());
+            }
+        });
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
     public interface VolleyCallback {
         void onSuccessResponse(String result);
 
@@ -345,6 +392,12 @@ public class APIConnection {
 
     public interface CourseCallback {
         void onSuccessResponse(Course course);
+
+        void onErrorResponse(String error);
+    }
+
+    public interface UsersCallback {
+        void onSuccessResponse(List<User> users);
 
         void onErrorResponse(String error);
     }
