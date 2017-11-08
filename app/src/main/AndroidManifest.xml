@@ -32,7 +32,15 @@
         <activity
             android:name=".activities.SignUpActivity"
             android:label="Registrate"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.PublicationDetailActivity"
+            android:label="@string/title_activity_publication_detail"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.com.push_tdp.push_tdp.activities.MainActivity" />
         </activity>
     </application>
 

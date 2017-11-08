@@ -8,14 +8,15 @@ public class Course {
 
     private int idCourse;
     private String nameCourse;
-    private int numberOfStudents;
-    private int capacity;
+    private int numberOfStudents;   // registered
+    private int capacity;           // vacancies
     private String imageCourse;
 
-    public Course(int idCourse, String nameCourse, int numberOfStudents, String imageCourse) {
+    public Course(int idCourse, String nameCourse, int numberOfStudents, int capacity, String imageCourse) {
         this.idCourse = idCourse;
         this.nameCourse = nameCourse;
         this.numberOfStudents = numberOfStudents;
+        this.capacity = capacity;
         this.imageCourse = imageCourse;
     }
 
@@ -42,7 +43,7 @@ public class Course {
         return numberOfStudents;
     }
 
-    public String getNumberOfStudentsAsString(){
+    public String getNumberOfStudentsAsString() {
         return String.valueOf(capacity);
     }
 
@@ -62,7 +63,7 @@ public class Course {
         return capacity;
     }
 
-    public String getCapacityAsString(){
+    public String getCapacityAsString() {
         return String.valueOf(capacity);
     }
 

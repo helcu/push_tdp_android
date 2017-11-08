@@ -24,37 +24,51 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     private List<Course> ListCourse;
     private Context context;
     private View view;
+    CourseAdapterInterface callback;
+
+
+    public CourseAdapter() {
+    }
 
     public CourseAdapter(List<Course> listCourse) {
         setListCourse(listCourse);
     }
 
-    public CourseAdapter() {
+
+    public List<Course> getListCourse() {
+        return ListCourse;
     }
 
 
+    public void setCourseAdapterInterface(CourseAdapterInterface callback) {
+        this.callback = callback;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_course_view,parent,false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_course_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Course course= getListCourse().get(position);
-        context=view.getContext();
+        final Course course = getListCourse().get(position);
+        context = view.getContext();
         Picasso.with(context).load(course.getImageCourse()).into(holder.courseImageView);
         holder.nameTextView.setText(course.getNameCourse());
         holder.studentsTextView.setText(String.valueOf(course.getNumberOfStudents()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onItemClick(course.getIdCourse());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return getListCourse().size();
-    }
-
-    public List<Course> getListCourse() {
-        return ListCourse;
     }
 
     public void setListCourse(List<Course> listCourse) {
@@ -65,16 +79,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView courseImageView;
         public TextView nameTextView;
-        public  TextView studentsTextView;
+        public TextView studentsTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            courseImageView =(ImageView) itemView.findViewById(R.id.courseImageView);
-            nameTextView =(TextView) itemView.findViewById(R.id.nameTextView);
-            studentsTextView =(TextView) itemView.findViewById(R.id.studentsTextView);
-
-
+            courseImageView = itemView.findViewById(R.id.courseImageView);
+            nameTextView = itemView.findViewById(R.id.nameTextView);
+            studentsTextView = itemView.findViewById(R.id.studentsTextView);
         }
     }
+
+    public interface CourseAdapterInterface {
+        void onItemClick(int courseId);
+    }
+
 }

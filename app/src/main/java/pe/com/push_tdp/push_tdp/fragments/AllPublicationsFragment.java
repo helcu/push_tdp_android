@@ -1,6 +1,7 @@
 package pe.com.push_tdp.push_tdp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.push_tdp.push_tdp.R;
+import pe.com.push_tdp.push_tdp.activities.PublicationDetailActivity;
 import pe.com.push_tdp.push_tdp.adapters.CourseAdapter;
 import pe.com.push_tdp.push_tdp.models.Course;
 import pe.com.push_tdp.push_tdp.network.APIConection;
@@ -21,14 +23,44 @@ import pe.com.push_tdp.push_tdp.network.APIConection;
 public class AllPublicationsFragment extends Fragment {
 
     Context context = getContext();
+    APIConection apiConection = new APIConection();
 
-    List<Course> courses;
     RecyclerView courseRecyclerView;
     CourseAdapter courseAdapter;
 
     public AllPublicationsFragment() {
-        APIConection apiConection = new APIConection();
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        final View view = inflater.inflate(R.layout.fragment_all_publications, container, false);
+
+        List<Course> courses = new ArrayList<>();
+        courseRecyclerView = view.findViewById(R.id.allPublicationRecyclerView);
+        courseRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        courseAdapter = new CourseAdapter(courses);
+        courseAdapter.setCourseAdapterInterface(new CourseAdapter.CourseAdapterInterface() {
+            @Override
+            public void onItemClick(int courseId) {
+                Intent intent = new Intent(getContext(), PublicationDetailActivity.class);
+                intent.putExtra("courseId", courseId);
+                startActivity(intent);
+            }
+        });
+        courseRecyclerView.setAdapter(courseAdapter);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestCourses();
+    }
+
+
+    void requestCourses() {
         apiConection.getCourses(context, new APIConection.CoursesCallback() {
             @Override
             public void onSuccessResponse(List<Course> coursesAPI) {
@@ -41,20 +73,5 @@ public class AllPublicationsFragment extends Fragment {
                 Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_all_publications, container, false);
-
-        courses = new ArrayList<>();
-        courseRecyclerView = view.findViewById(R.id.allPublicationRecyclerView);
-        courseRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        courseAdapter = new CourseAdapter(courses);
-        courseRecyclerView.setAdapter(courseAdapter);
-
-        return view;
     }
 }

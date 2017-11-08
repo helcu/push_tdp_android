@@ -166,17 +166,17 @@ public class APIConection {
 
                             int courseId = jsonCourse.getInt("id");
                             String name = jsonCourse.getString("name");
-                            int numberOfStudents = jsonCourse.getInt("vacancies");
+                            int capacity = jsonCourse.getInt("vacancies");
                             String url = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png";
                             String state = jsonCourse.getString("state");
 
                             if (state.equals("ACT")) {
-                                courses.add(new Course(courseId, name, numberOfStudents, url));
+                                courses.add(new Course(courseId, name, 0, capacity, url));
                             }
                         }
                         callback.onSuccessResponse(courses);
                     } else {
-                        String message = "GG";
+                        String message = jsonObject.getString("Message");
                         callback.onErrorResponse(message);
                     }
 
@@ -194,7 +194,51 @@ public class APIConection {
             }
         });
         APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
 
+
+    public void getCourseDetail(final Context context, final int courseId, final CourseCallback callback) {
+        String url = Constants.URL_API + "/courses/" + courseId;
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String statusCode = jsonObject.getString("StatusCode");
+
+                    if (statusCode.equals("200")) {
+                        JSONObject jsonCourse = jsonObject.getJSONObject("Message");
+                        int courseId = jsonCourse.getInt("id");
+                        String name = jsonCourse.getString("name");
+                        int numberOfStudents = jsonObject.getInt("Registered");
+                        int capacity = jsonCourse.getInt("vacancies");
+                        String url = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png";
+
+                        Course course = new Course(courseId, name, numberOfStudents, capacity, url);
+                        callback.onSuccessResponse(course);
+                    } else {
+                        String message = jsonObject.getString("Message");
+                        callback.onErrorResponse(message);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onErrorResponse(e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+
+                callback.onErrorResponse(error.toString());
+            }
+        });
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
 
@@ -206,6 +250,12 @@ public class APIConection {
 
     public interface CoursesCallback {
         void onSuccessResponse(List<Course> courses);
+
+        void onErrorResponse(String error);
+    }
+
+    public interface CourseCallback {
+        void onSuccessResponse(Course course);
 
         void onErrorResponse(String error);
     }
