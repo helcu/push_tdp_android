@@ -162,12 +162,13 @@ public class APIConection {
 
                             int courseId = jsonCourse.getInt("id");
                             String name = jsonCourse.getString("name");
+                            int numberOfStudents = jsonCourse.getInt("registered");
                             int capacity = jsonCourse.getInt("vacancies");
                             String url = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png";
                             String state = jsonCourse.getString("state");
 
                             if (state.equals("ACT")) {
-                                courses.add(new Course(courseId, name, 0, capacity, url));
+                                courses.add(new Course(courseId, name, numberOfStudents, capacity, url));
                             }
                         }
                         callback.onSuccessResponse(courses);

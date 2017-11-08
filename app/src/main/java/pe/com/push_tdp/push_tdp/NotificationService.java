@@ -41,7 +41,7 @@ public class NotificationService extends FirebaseMessagingService {
 
         Notification.Builder mNotifyBuilder = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("TDPPush")
+                .setContentTitle("Pushel")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
