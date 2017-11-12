@@ -50,8 +50,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
         }
 
         apiConnection = new APIConnection();
-        requestCourseId(courseId);
-        studentsOfaCourse(courseId);
+        refreshCourseAndStudent(courseId);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +60,13 @@ public class PublicationDetailActivity extends AppCompatActivity {
                 apiConnection.subscribeCourse(context, courseId, userId, new APIConnection.VolleyCallback() {
                     @Override
                     public void onSuccessResponse(String result) {
+                        refreshCourseAndStudent(courseId);
                         Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onErrorResponse(String error) {
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -82,15 +82,15 @@ public class PublicationDetailActivity extends AppCompatActivity {
 
                 getSupportActionBar().setTitle(course.getNameCourse());
 
-                ((TextView) findViewById(R.id.nameTextView)).setText(course.getNameCourse());
+                //((TextView) findViewById(R.id.nameTextView)).setText(course.getNameCourse());
                 ((TextView) findViewById(R.id.vacanciesTextView)).setText(
                         course.getNumberOfStudents() + "/" + course.getCapacity());
             }
 
             @Override
             public void onErrorResponse(String error) {
-                Toast.makeText(context, Constants.MESSAGE_APP_ERROR, Toast.LENGTH_SHORT).show();
-                finish();
+                //Toast.makeText(context, Constants.MESSAGE_APP_ERROR, Toast.LENGTH_SHORT).show();
+                //finish();
             }
         });
     }
@@ -107,9 +107,14 @@ public class PublicationDetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(String error) {
-                Toast.makeText(context, Constants.MESSAGE_APP_ERROR, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, Constants.MESSAGE_APP_ERROR, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void refreshCourseAndStudent(int courseId) {
+        requestCourseId(courseId);
+        studentsOfaCourse(courseId);
     }
 
 }

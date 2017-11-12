@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(String error) {
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             logInButton.setEnabled(true);
                         }

@@ -10,7 +10,7 @@
     tools:context="pe.com.push_tdp.push_tdp.activities.PublicationDetailActivity"
     tools:showIn="@layout/activity_publication_detail">
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFCDD2"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Nombre"
         android:textAlignment="textEnd"
-        android:textSize="16sp" />
+        android:textSize="16sp" />-->
 
     <TextView
         android:layout_width="match_parent"

@@ -51,7 +51,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(String error) {
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                             registerFloatingActionButton.setEnabled(true);
                         }
                     });

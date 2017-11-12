@@ -25,7 +25,6 @@ public class NotificationService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
         //Call method to generate notification
         generateNotification(remoteMessage.getData(), remoteMessage.getNotification().getBody());
     }
