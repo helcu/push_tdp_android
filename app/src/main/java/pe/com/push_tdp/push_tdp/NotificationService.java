@@ -39,7 +39,7 @@ public class NotificationService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Notification.Builder mNotifyBuilder = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.pushel_logo)
                 .setContentTitle("Pushel")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
