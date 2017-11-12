@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.logOutItem:
                 SharedPreferencesUtil.setKeepLogged(context, false);
                 startActivity(new Intent(context, LoginActivity.class));
