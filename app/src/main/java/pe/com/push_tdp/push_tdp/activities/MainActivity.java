@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new AllPublicationsFragment(), "All Publications");
-        //viewPagerAdapter.addFragment(new SpecificPublicationsFragment(), "Specific Publications");
+        viewPagerAdapter.addFragment(new SpecificPublicationsFragment(), "Specific Publications");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
