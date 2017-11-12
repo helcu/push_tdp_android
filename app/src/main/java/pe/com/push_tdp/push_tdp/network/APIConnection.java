@@ -2,6 +2,7 @@ package pe.com.push_tdp.push_tdp.network;
 
 import android.content.Context;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -335,7 +336,7 @@ public class APIConnection {
 
 
     public void usersSubscribed(final Context context, final int courseId, final UsersCallback callback) {
-        String url = Constants.URL_API + "/requests_users/" + courseId;
+        String url = Constants.URL_API + "/subscribe/" + courseId;
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -378,6 +379,49 @@ public class APIConnection {
         });
         APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
+
+
+    public void notifyCourseFilled(final Context context, final int courseId, final VolleyCallback callback) {
+        String url = Constants.URL_API + "/subscribe";
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = null;
+                    jsonObject = new JSONObject(response);
+                    String statusCode = jsonObject.getString("StatusCode");
+                    if (statusCode.equals("200")) {
+                        callback.onSuccessResponse(Constants.MESSAGE_COURSE_FILLED);
+                    }
+                    else {
+                        callback.onErrorResponse(Constants.MESSAGE_APP_ERROR);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+
+                callback.onErrorResponse(error.toString());
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("course_id", String.valueOf(courseId));
+
+                return params;
+            }
+        };
+
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
 
     public interface VolleyCallback {
         void onSuccessResponse(String result);
