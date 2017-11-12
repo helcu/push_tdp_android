@@ -148,7 +148,6 @@ public class APIConnection {
             @Override
             public void onResponse(String response) {
                 try {
-
                     JSONObject jsonObject = new JSONObject(response);
                     String statusCode = jsonObject.getString("StatusCode");
 
