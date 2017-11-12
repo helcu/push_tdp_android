@@ -25,6 +25,7 @@ public class Constants {
     public static final String MESSAGE_APP_ERROR = "Ha ocurrido un error con la aplicación";
     public static final String MESSAGE_COURSE_REGISTER_SUCCESSFULLY = "El curso ha sido creado.";
     public static final String MESSAGE_COURSE_REGISTER_FAILED= "No se pudo crear el curso.";
+    public static final String MESSAGE_COURSE_FILLED= "El curso está completo.";
 
 
 
