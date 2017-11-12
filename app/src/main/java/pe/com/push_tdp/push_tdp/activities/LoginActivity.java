@@ -34,6 +34,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (SharedPreferencesUtil.getKeepLogged(context)) {
+            manageFirebase();
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         usernameTextInputEditText = (TextInputEditText) findViewById(R.id.usernameTextInputEditText);
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         logInButton = (Button) findViewById(R.id.logInButton);
@@ -62,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             startActivity(new Intent(context, MainActivity.class));
+                            SharedPreferencesUtil.setKeepLogged(context, true);
+                            // TODO: activate firebase
                             finish();
                         }
 

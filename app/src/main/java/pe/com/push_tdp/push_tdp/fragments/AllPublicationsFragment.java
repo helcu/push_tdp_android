@@ -54,6 +54,12 @@ public class AllPublicationsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         requestCourses();
