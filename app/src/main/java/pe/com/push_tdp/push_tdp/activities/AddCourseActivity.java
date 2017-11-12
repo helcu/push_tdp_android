@@ -17,6 +17,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
     private TextInputEditText courseNameTextInputEditText;
     private TextInputEditText vacanciesTextInputEditText;
+    private APIConnection apiConnection = new APIConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class AddCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_course);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final FloatingActionButton registerFloatingActionButton = (FloatingActionButton) findViewById(R.id.regiterNewCourse);
 
@@ -40,7 +42,6 @@ public class AddCourseActivity extends AppCompatActivity {
                     int vacancies = Integer.parseInt(vacanciesTextInputEditText.getText().toString());
                     String urlImage = "";
 
-                    APIConnection apiConnection = new APIConnection();
                     apiConnection.addCourse(context, courseName, vacancies, new APIConnection.VolleyCallback() {
                         @Override
                         public void onSuccessResponse(String result) {
@@ -69,10 +70,15 @@ public class AddCourseActivity extends AppCompatActivity {
         } else if (vacanciesTextInputEditText.getText().toString().trim().equals("")) {
             Toast.makeText(getBaseContext(), "Por favor, escriba el número de vacantes.", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (courseNameTextInputEditText.getText().toString().contains(".") || courseNameTextInputEditText.getText().toString().contains(",")) {
+            Toast.makeText(getBaseContext(), "El nombre del curso no debe tener puntos ni comas.", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (vacanciesTextInputEditText.getText().toString().contains(".") || vacanciesTextInputEditText.getText().toString().contains(",")) {
+            Toast.makeText(getBaseContext(), "El número de vacantes no debe tener puntos ni comas.", Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             return true;
         }
-
     }
 
 }

@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     //REMEMBER: Buttons has to be public to be able to use in class MyAsyncTask
     public Button logInButton;
     public Button signUpButton;
+    private APIConnection apiConnection = new APIConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     String password = passwordTextInputEditText.getText().toString();
                     String accessToken = SharedPreferencesUtil.getTokenFromPrefs(context);
 
-                    APIConnection apiConnection = new APIConnection();
                     apiConnection.login(context, username, password, accessToken, new APIConnection.VolleyCallback() {
                         @Override
                         public void onSuccessResponse(String result) {
@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                finish();
             }
         });
     }

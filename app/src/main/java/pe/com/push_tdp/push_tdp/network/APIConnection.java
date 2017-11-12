@@ -322,6 +322,7 @@ public class APIConnection {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("user_id", SharedPreferencesUtil.getUserIdFromPrefs(context));
                 params.put("name", name);
                 params.put("vacancies", String.valueOf(vacancies));
                 params.put("url", "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png");

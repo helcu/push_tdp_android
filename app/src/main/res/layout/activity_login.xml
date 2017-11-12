@@ -42,7 +42,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="40dp"
             android:contentDescription="Pushel"
-            android:src="@drawable/ic_upc_logo" />
+            android:src="@drawable/pushel_logo" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/usernameTextInputLayout"

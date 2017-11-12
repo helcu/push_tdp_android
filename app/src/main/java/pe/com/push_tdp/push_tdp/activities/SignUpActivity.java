@@ -1,5 +1,6 @@
 package pe.com.push_tdp.push_tdp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
@@ -20,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText lastNameTextInputEditText;
     private TextInputEditText firstNameTextInputEditText;
     private TextInputEditText passwordTextInputEditText;
+    private APIConnection apiConnection = new APIConnection();
 
     public Button signUpButton;
 
@@ -40,17 +42,23 @@ public class SignUpActivity extends AppCompatActivity {
                 signUpButton.setEnabled(false);
 
                 if (validate()) {
+                    final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setMessage("Autentificando...");
+                    progressDialog.show();
+
                     String username = userTextInputEditText.getText().toString();
                     String name = firstNameTextInputEditText.getText().toString();
                     String lastName = lastNameTextInputEditText.getText().toString();
                     String password = passwordTextInputEditText.getText().toString();
                     String token_id = "";
 
-                    APIConnection apiConnection = new APIConnection();
                     apiConnection.register(context, username, password, name, lastName, token_id, new APIConnection.VolleyCallback() {
                         @Override
                         public void onSuccessResponse(String result) {
                             Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                             finish();
                         }
@@ -58,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(String error) {
                             Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             signUpButton.setEnabled(true);
                         }
                     });
