@@ -75,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logOutItem:
+                SharedPreferencesUtil.setKeepLogged(context, false);
+                startActivity(new Intent(context, LoginActivity.class));
+                // TODO: deactivate firebase
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     /*@Override
     public boolean onQueryTextSubmit(String query) {
         return false;

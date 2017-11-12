@@ -80,7 +80,7 @@ public class PublicationDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccessResponse(Course course) {
 
-                getSupportActionBar().setTitle("Curso " + course.getNameCourse());
+                getSupportActionBar().setTitle(course.getNameCourse());
 
                 ((TextView) findViewById(R.id.nameTextView)).setText(course.getNameCourse());
                 ((TextView) findViewById(R.id.vacanciesTextView)).setText(

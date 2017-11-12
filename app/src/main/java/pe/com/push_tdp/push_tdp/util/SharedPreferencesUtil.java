@@ -33,4 +33,16 @@ public class SharedPreferencesUtil {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(Constants.SP_USER_ID, null);
     }
+
+    public static void setKeepLogged(Context context, boolean keepLogged) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(Constants.SP_KEEP_LOGGED, keepLogged);
+        editor.apply();
+    }
+
+    public static boolean getKeepLogged(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getBoolean(Constants.SP_KEEP_LOGGED, false);
+    }
 }
