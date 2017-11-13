@@ -3,6 +3,8 @@ package pe.com.push_tdp.push_tdp.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText usernameTextInputEditText;
     private TextInputEditText passwordTextInputEditText;
+    private ConstraintLayout loginConstraintLayout;
+    private AnimationDrawable loginAnimationDrawable;
     //REMEMBER: Buttons has to be public to be able to use in class MyAsyncTask
     public Button logInButton;
     public Button signUpButton;
@@ -47,6 +51,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         logInButton = (Button) findViewById(R.id.logInButton);
         signUpButton = (Button) findViewById(R.id.signUpButton);
+        loginConstraintLayout = (ConstraintLayout) findViewById(R.id.loginConstraintLayout);
+        loginAnimationDrawable = (AnimationDrawable) loginConstraintLayout.getBackground();
+
+        loginAnimationDrawable.setEnterFadeDuration(5000);
+
+        loginAnimationDrawable.setExitFadeDuration(5000);
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +103,24 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (loginAnimationDrawable != null && !loginAnimationDrawable.isRunning()) {
+            // start the animation
+            loginAnimationDrawable.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (loginAnimationDrawable != null && !loginAnimationDrawable.isRunning()) {
+            // start the animation
+            loginAnimationDrawable.stop();
+        }
     }
 
     private boolean validate() {

@@ -7,18 +7,6 @@
     android:background="@android:color/white"
     tools:context="pe.com.push_tdp.push_tdp.activities.LoginActivity">
 
-    <com.tbuonomo.randomlines.RandomLinesView
-        android:id="@+id/random_lines_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lineColor="@color/colorDivider"
-        app:lineSpacing="90dp"
-        app:lineWidth="3dp" />
-
     <LinearLayout
         android:id="@+id/emailAndPasswordLayout"
         android:layout_width="0dp"
