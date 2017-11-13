@@ -7,28 +7,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-
-import java.util.ArrayList;
-
-import pe.com.push_tdp.push_tdp.adapters.CourseAdapter;
 import pe.com.push_tdp.push_tdp.R;
 import pe.com.push_tdp.push_tdp.adapters.ViewPagerAdapter;
-import pe.com.push_tdp.push_tdp.fragments.AllPublicationsFragment;
-import pe.com.push_tdp.push_tdp.fragments.SpecificPublicationsFragment;
-import pe.com.push_tdp.push_tdp.models.Course;
+import pe.com.push_tdp.push_tdp.fragments.AllCoursesFragment;
+import pe.com.push_tdp.push_tdp.fragments.CoursesCompletedFragment;
 import pe.com.push_tdp.push_tdp.util.SharedPreferencesUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new AllPublicationsFragment(), "All Publications");
-        viewPagerAdapter.addFragment(new SpecificPublicationsFragment(), "Specific Publications");
+        viewPagerAdapter.addFragment(new AllCoursesFragment(), "All Courses");
+        viewPagerAdapter.addFragment(new CoursesCompletedFragment(), "Coruses Completed");
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

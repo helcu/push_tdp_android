@@ -240,7 +240,7 @@ public class APIConnection {
 
     public void subscribeCourse(final Context context, final int courseId, final int userId, final VolleyCallback callback) {
 
-        String url = Constants.URL_API + "/requests_users";
+        String url = Constants.URL_API + "/courses_users";
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST, url, new Response.Listener<String>() {
@@ -418,6 +418,60 @@ public class APIConnection {
             }
         };
 
+        APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+
+    public void getCoursesCompleted(final Context context, final CoursesCallback callback) {
+        String url = Constants.URL_API + "/courses_completed";
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String statusCode = jsonObject.getString("StatusCode");
+
+                    if (statusCode.equals("200")) {
+                        List<Course> courses = new ArrayList<>();
+
+                        JSONArray jsonCourses = jsonObject.getJSONArray("Message");
+
+                        for (int i = 0; i < jsonCourses.length(); i++) {
+                            JSONObject jsonCourse = jsonCourses.getJSONObject(i);
+
+                            int courseId = jsonCourse.getInt("id");
+                            String name = jsonCourse.getString("name");
+                            int numberOfStudents = jsonCourse.getInt("registered");
+                            int capacity = jsonCourse.getInt("vacancies");
+                            String url = jsonCourse.getString("url");
+                            String state = jsonCourse.getString("state");
+
+                            if (state.equals("ACT")) {
+                                courses.add(new Course(courseId, name, numberOfStudents, capacity, url));
+                            }
+                        }
+                        callback.onSuccessResponse(courses);
+                    } else {
+                        String message = jsonObject.getString("Message");
+                        callback.onErrorResponse(message);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onErrorResponse(e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                int statusCode = error.networkResponse == null ? -1 : error.networkResponse.statusCode;
+
+                callback.onErrorResponse(error.toString());
+            }
+        });
         APINetworkSingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pe.com.push_tdp.push_tdp.fragments.SpecificPublicationsFragment">
+    tools:context="pe.com.push_tdp.push_tdp.fragments.CoursesCompletedFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView

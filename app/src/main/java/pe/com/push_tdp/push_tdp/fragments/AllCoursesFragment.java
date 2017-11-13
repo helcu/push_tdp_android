@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import pe.com.push_tdp.push_tdp.adapters.CourseAdapter;
 import pe.com.push_tdp.push_tdp.models.Course;
 import pe.com.push_tdp.push_tdp.network.APIConnection;
 
-public class AllPublicationsFragment extends Fragment {
+public class AllCoursesFragment extends Fragment {
 
     Context context = getContext();
     APIConnection apiConnection = new APIConnection();
@@ -28,14 +27,14 @@ public class AllPublicationsFragment extends Fragment {
     RecyclerView courseRecyclerView;
     CourseAdapter courseAdapter;
 
-    public AllPublicationsFragment() {
+    public AllCoursesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_all_publications, container, false);
+        final View view = inflater.inflate(R.layout.fragment_all_courses, container, false);
 
         List<Course> courses = new ArrayList<>();
         courseRecyclerView = view.findViewById(R.id.allPublicationRecyclerView);

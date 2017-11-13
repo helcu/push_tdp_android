@@ -3,13 +3,9 @@ package pe.com.push_tdp.push_tdp.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import pe.com.push_tdp.push_tdp.fragments.AllPublicationsFragment;
-import pe.com.push_tdp.push_tdp.fragments.SpecificPublicationsFragment;
 
 /**
  * Created by hugo_ on 25/10/2017.
